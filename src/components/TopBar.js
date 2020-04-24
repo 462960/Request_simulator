@@ -3,7 +3,11 @@ import React from "react";
 import PageHeader from "@atlaskit/page-header";
 
 const TopBar = () => {
-  return <PageHeader>Request Simulator</PageHeader>;
+  return (
+    <div className="center">
+      <PageHeader>Request Simulator</PageHeader>
+    </div>
+  );
 };
 
 export default TopBar;
