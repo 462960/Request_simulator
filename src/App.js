@@ -9,7 +9,7 @@ import InputModule from "./components/InputModule";
 import LoadItem from "./components/LoadItem";
 import RunStop from "./components/RunStop";
 
-function App() {
+function App({ loaders, addLoader, removeLoader }) {
   const [freeze, toggleFreeze] = useState(true);
 
   return (
@@ -23,8 +23,8 @@ function App() {
             <li>Delay (sec)</li>
             <li></li>
           </ul>
-          <InputModule />
-          <LoadItem />
+          <InputModule addLoader={addLoader} />
+          <LoadItem loaders={loaders} removeLoader={removeLoader} />
           <RunStop />
         </div>
         <div className="spinner-container">

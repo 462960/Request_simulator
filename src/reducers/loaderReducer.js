@@ -1,7 +1,7 @@
 import { ADD_LOADER, REMOVE_LOADER } from "../action/constants";
 
 export function loaderReducer(
-  state = [{ id: 1, name: "Kyk", duration: 3 }],
+  state = [{ id: 1, name: "Kyk", delay: 3 }],
   action
 ) {
   switch (action.type) {
@@ -11,7 +11,7 @@ export function loaderReducer(
         {
           id: action.id,
           name: action.name,
-          duration: action.duration,
+          delay: action.delay,
         },
       ];
     case REMOVE_LOADER:

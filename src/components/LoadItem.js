@@ -1,8 +1,8 @@
 import React from "react";
 
-import loaders from "../helper";
+// import loaders from "../helper";
 
-const LoadItem = () => {
+const LoadItem = ({ loaders, removeLoader }) => {
   return (
     <div>
       {(loaders || []).map((x) => (
