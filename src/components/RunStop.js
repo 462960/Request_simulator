@@ -1,6 +1,6 @@
 import React from "react";
 
-import Button, { ButtonGroup } from "@atlaskit/button";
+import Button from "@atlaskit/button";
 
 const RunStop = () => {
   return (

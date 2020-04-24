@@ -73,6 +73,15 @@
     tslib "^1.9.3"
     uuid "^3.1.0"
 
+"@atlaskit/icon@^20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@atlaskit/icon/-/icon-20.1.1.tgz#ce3ed8d09389028643e70a7ccfde31fc74713175"
+  integrity sha512-yd4MvBPi6Bf6BqzOjktnAsGJVAmPhe2YFEUAq7fO0Zz7KK/eQU5fEIyclINeK65cAD/9VsI1P+gbTQ5ziK44/A==
+  dependencies:
+    "@atlaskit/theme" "^9.5.1"
+    tslib "^1.9.3"
+    uuid "^3.1.0"
+
 "@atlaskit/item@^11.0.2":
   version "11.0.2"
   resolved "https://registry.yarnpkg.com/@atlaskit/item/-/item-11.0.2.tgz#6f870fd8e45cb8670efb3e9aeb62cf7d8dd12d62"

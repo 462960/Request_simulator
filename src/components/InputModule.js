@@ -1,35 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Textfield from "@atlaskit/textfield";
-import DropdownMenu, {
-  DropdownItemGroup,
-  DropdownItem,
-  DropdownMenuStateless,
-} from "@atlaskit/dropdown-menu";
-import Button, { ButtonGroup } from "@atlaskit/button";
+import Button from "@atlaskit/button";
 
-const InputModule = () => {
-  // return <Textfield />;
+const InputModule = ({ addLoader }) => {
+  const [name, setName] = useState("");
+  const [delay, setDelay] = useState(1);
+  const [invalid, setInvalid] = useState(false);
+
+  const setLoader = () => {
+    !name && setInvalid(true);
+    name && addLoader(name, delay);
+    setTimeout(() => {
+      setInvalid(false);
+    }, 500);
+    setName("");
+    setDelay(1);
+  };
+
   return (
     <ul className="table-unit">
       <li>
-        <Textfield />
+        <Textfield
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          isInvalid={invalid}
+        />
       </li>
       <li>
-        {" "}
-        <DropdownMenu
-          trigger="Choices"
-          triggerType="button"
-          onOpenChange={(e) => console.log("dropdown opened", e)}
-        >
-          <DropdownItemGroup>
-            <DropdownItem>Sydney</DropdownItem>
-            <DropdownItem>Melbourne</DropdownItem>
-          </DropdownItemGroup>
-        </DropdownMenu>
+        <Textfield
+          onChange={(e) => setDelay(e.target.value)}
+          value={delay}
+          type="number"
+          min="1"
+          max="10"
+        />
       </li>
       <li>
-        <Button>Add</Button>
+        <Button onClick={setLoader}>Add</Button>
       </li>
     </ul>
   );
