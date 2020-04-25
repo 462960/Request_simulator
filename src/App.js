@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.scss";
 import cn from "classnames";
 
@@ -11,6 +11,15 @@ import RunStop from "./components/RunStop";
 
 function App({ loaders, addLoader, removeLoader }) {
   const [freeze, toggleFreeze] = useState(true);
+  const [disabled, setDisabled] = useState(false);
+
+  useEffect(() => {
+    if (loaders.length >= 3) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [loaders]);
 
   return (
     <div className="App">
@@ -23,7 +32,7 @@ function App({ loaders, addLoader, removeLoader }) {
             <li>Delay (sec)</li>
             <li></li>
           </ul>
-          <InputModule addLoader={addLoader} />
+          <InputModule addLoader={addLoader} disabled={disabled} />
           <LoadItem loaders={loaders} removeLoader={removeLoader} />
           <RunStop />
         </div>
