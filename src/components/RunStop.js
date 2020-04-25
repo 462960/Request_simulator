@@ -2,15 +2,15 @@ import React from "react";
 
 import Button from "@atlaskit/button";
 
-const RunStop = () => {
+const RunStop = ({ runLoader, stopLoader }) => {
   return (
     <ul className="table-unit">
       <li></li>
       <li>
-        <Button>Run</Button>
+        <Button onClick={runLoader}>Run</Button>
       </li>
       <li>
-        <Button>Stop</Button>
+        <Button onClick={stopLoader}>Stop</Button>
       </li>
     </ul>
   );

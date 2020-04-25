@@ -12,6 +12,10 @@ import RunStop from "./components/RunStop";
 function App({ loaders, addLoader, removeLoader }) {
   const [freeze, toggleFreeze] = useState(true);
   const [disabled, setDisabled] = useState(false);
+  const [queue, setQueue] = useState([]);
+  const [counter, setCounter] = useState(0);
+  const [timer, setTimer] = useState("");
+  const [currentLoader, setCurrentLoader] = useState("");
 
   useEffect(() => {
     if (loaders.length >= 3) {
@@ -19,7 +23,29 @@ function App({ loaders, addLoader, removeLoader }) {
     } else {
       setDisabled(false);
     }
+    setQueue([...loaders]);
   }, [loaders]);
+
+  const runLoader = () => {
+    if (freeze && queue.length !== 0 && counter === 0) {
+      const item = queue.shift();
+      setCurrentLoader(item.name);
+      setCounter(item.delay);
+    }
+    if (freeze) {
+      toggleFreeze(false);
+
+      const timerID = setInterval(() => {
+        setCounter((counter) => counter - 1);
+      }, 1000);
+      setTimer(timerID);
+    }
+  };
+
+  const stopLoader = () => {
+    clearInterval(timer);
+    toggleFreeze(true);
+  };
 
   return (
     <div className="App">
@@ -34,14 +60,14 @@ function App({ loaders, addLoader, removeLoader }) {
           </ul>
           <InputModule addLoader={addLoader} disabled={disabled} />
           <LoadItem loaders={loaders} removeLoader={removeLoader} />
-          <RunStop />
+          <RunStop runLoader={runLoader} stopLoader={stopLoader} />
         </div>
         <div className="spinner-container">
           <span className={cn({ freeze })}>
             <Spinner size="xlarge" isCompleting={false} />
           </span>
-          <span>Loder first</span>
-          <span>1 sec left</span>
+          <span>{currentLoader}</span>
+          <span>{counter}</span>
         </div>
       </div>
     </div>
