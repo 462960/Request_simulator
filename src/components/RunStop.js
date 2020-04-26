@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Button from "@atlaskit/button";
 
@@ -17,3 +18,8 @@ const RunStop = ({ runLoader, stopLoader }) => {
 };
 
 export default RunStop;
+
+RunStop.propTypes = {
+  runLoader: PropTypes.func,
+  stopLoader: PropTypes.func,
+};

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 import Textfield from "@atlaskit/textfield";
 import Button from "@atlaskit/button";
@@ -46,3 +47,8 @@ const InputModule = ({ addLoader, disabled }) => {
 };
 
 export default InputModule;
+
+InputModule.propTypes = {
+  disabled: PropTypes.bool,
+  addLoader: PropTypes.func,
+};

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import "./App.scss";
 import cn from "classnames";
 
@@ -96,3 +97,9 @@ function App({ loaders, addLoader, removeLoader }) {
 }
 
 export default App;
+
+App.propTypes = {
+  loaders: PropTypes.array,
+  addLoader: PropTypes.func,
+  removeLoader: PropTypes.func,
+};
