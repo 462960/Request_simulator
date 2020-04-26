@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Textfield from "@atlaskit/textfield";
 import Button from "@atlaskit/button";
 
-const InputModule = ({ addLoader }) => {
+const InputModule = ({ addLoader, disabled }) => {
   const [name, setName] = useState("");
   const [delay, setDelay] = useState(1);
   const [invalid, setInvalid] = useState(false);
@@ -37,7 +37,9 @@ const InputModule = ({ addLoader }) => {
         />
       </li>
       <li>
-        <Button onClick={setLoader}>Add</Button>
+        <Button onClick={setLoader} isDisabled={disabled}>
+          Add
+        </Button>
       </li>
     </ul>
   );
