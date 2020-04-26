@@ -18,7 +18,7 @@ function App({ loaders, addLoader, removeLoader }) {
   const [currentLoader, setCurrentLoader] = useState("");
 
   useEffect(() => {
-    if (loaders.length >= 3) {
+    if (loaders.length >= 10) {
       setDisabled(true);
     } else {
       setDisabled(false);
@@ -27,24 +27,27 @@ function App({ loaders, addLoader, removeLoader }) {
   }, [loaders]);
 
   useEffect(() => {
-    if (queue.length === 0 && counter === 0) {
+    if (queue.length === 0 && counter === 0 && !freeze) {
       stopLoader();
+      setQueue([...loaders]);
+      setCurrentLoader("");
+    } else if (queue.length !== 0 && counter === -1 && !freeze) {
+      setUpCurrentLoader();
     }
-    // else if (counter === 0 && !freeze)
-    // {
-    //   runLoader();
-    // }
-  }, [counter, queue]);
+  }, [counter, queue, freeze]);
+
+  const setUpCurrentLoader = () => {
+    const item = queue.shift();
+    setCurrentLoader(item.name);
+    setCounter(item.delay);
+  };
 
   const runLoader = () => {
     if (freeze && queue.length !== 0 && counter === 0) {
-      const item = queue.shift();
-      setCurrentLoader(item.name);
-      setCounter(item.delay);
+      setUpCurrentLoader();
     }
     if (freeze) {
       toggleFreeze(false);
-
       const timerID = setInterval(() => {
         setCounter((counter) => counter - 1);
       }, 1000);
@@ -77,7 +80,7 @@ function App({ loaders, addLoader, removeLoader }) {
             <Spinner size="xlarge" isCompleting={false} />
           </span>
           <span>{currentLoader}</span>
-          <span>{counter}</span>
+          <span>{counter} sec left</span>
         </div>
       </div>
     </div>
