@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import "./App.scss";
 import cn from "classnames";
 
@@ -16,6 +17,7 @@ function App({ loaders, addLoader, removeLoader }) {
   const [counter, setCounter] = useState(0);
   const [timer, setTimer] = useState("");
   const [currentLoader, setCurrentLoader] = useState("");
+  const [onHold, setOnHold] = useState(false);
 
   useEffect(() => {
     if (loaders.length >= 10) {
@@ -53,11 +55,13 @@ function App({ loaders, addLoader, removeLoader }) {
       }, 1000);
       setTimer(timerID);
     }
+    setOnHold(false);
   };
 
   const stopLoader = () => {
     clearInterval(timer);
     toggleFreeze(true);
+    setOnHold(true);
   };
 
   return (
@@ -72,7 +76,12 @@ function App({ loaders, addLoader, removeLoader }) {
             <li></li>
           </ul>
           <InputModule addLoader={addLoader} disabled={disabled} />
-          <LoadItem loaders={loaders} removeLoader={removeLoader} />
+          <LoadItem
+            loaders={loaders}
+            removeLoader={removeLoader}
+            currentLoader={currentLoader}
+            onHold={onHold}
+          />
           <RunStop runLoader={runLoader} stopLoader={stopLoader} />
         </div>
         <div className="spinner-container">
@@ -88,3 +97,9 @@ function App({ loaders, addLoader, removeLoader }) {
 }
 
 export default App;
+
+App.propTypes = {
+  loaders: PropTypes.array,
+  addLoader: PropTypes.func,
+  removeLoader: PropTypes.func,
+};
