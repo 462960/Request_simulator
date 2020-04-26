@@ -34,7 +34,7 @@ function App({ loaders, addLoader, removeLoader }) {
     } else if (queue.length !== 0 && counter === -1 && !freeze) {
       setUpCurrentLoader();
     }
-  }, [counter, queue, freeze]);
+  }, [counter, queue, freeze, loaders]);
 
   const setUpCurrentLoader = () => {
     const item = queue.shift();
