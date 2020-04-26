@@ -30,11 +30,62 @@
   & > li {
     list-style: none;
     flex: 2 2;
+    padding: 3px;
   }
   & > li:first-child {
     flex: 4 4;
   }
   & > li:last-child {
     flex: 1 1;
+  }
+}
+
+.blinking {
+  animation: blinkingText 3.5s infinite;
+}
+
+@keyframes blinkingText {
+  0% {
+    color: green;
+  }
+  17% {
+    color: green;
+  }
+  33% {
+    color: #000;
+  }
+  50% {
+    color: #000;
+  }
+  67% {
+    color: #000;
+  }
+  82% {
+    color: green;
+  }
+  100% {
+    color: green;
+  }
+}
+
+.paused {
+  animation: pausedLoad 3.5s infinite;
+}
+
+@keyframes pausedLoad {
+  0% {
+    color: #000;
+  }
+  49% {
+    color: red;
+  }
+  50% {
+    color: red;
+  }
+  99% {
+    color: red;
+  }
+  100% {
+    color: #000;
   }
 }
